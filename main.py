@@ -108,6 +108,7 @@ async def checkbalance(ctx, bet):
 @bot.command()
 async def coin(ctx, side, bet):
     casharr = []
+    sides = ["орёл", "орел", "решка"]
 
     for i in sql.execute(f"SELECT cash FROM users WHERE userid = '{ctx.author.id}'"):
         casharr.append(i[0])
@@ -124,8 +125,8 @@ async def coin(ctx, side, bet):
     sql.execute(f'SELECT userid FROM users WHERE userid = "{ctx.author.id}"')
     if sql.fetchone() is None:
         await ctx.send(f"Вы еще не игрок, попробуйте ```v_profile```, если еще не пробовали!")
-    else:      
-        if side not in "ОРЁЛ" and side not in "РЕШКА" and side not in "ОРЕЛ" and side not in "орёл" and side not in "орел" and side not in "решка":
+    else:
+        if  side.lower() not in sides:
             await ctx.send(f'{ctx.author.mention}, выберите между ***ОРЁЛ*** или ***РЕШКА***!')
             return
         else:
@@ -160,4 +161,7 @@ async def on_message(message):
                 
                 
 
-bot.run("MTA3MDY1NjM3NjI4NTcxMjM4Ng.G4cRVI.Dq4TmGRyLLn8yPzht9aWw38LMQ6_Y60gKsdJLU")
+bot.run("MTA3MDY1NjM3NjI4NTcxMjM4Ng.GU47k9.YB6KJBXbZpTveRqQGdeKwF2QcScesNeXnmIzEw")
+
+# TODO: добавить топ по балансу
+# кот в мешке, от какой-то ставки есть шанс подъебать кого-то другого и заставить сыграть + как-то на этом навариться или много потерять
